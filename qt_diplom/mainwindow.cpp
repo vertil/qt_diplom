@@ -25,6 +25,16 @@ MainWindow::MainWindow(QWidget *parent)
                                                           <<"dep_id");
 
 
+    //faces
+        //list
+    connect(this->ui->get_faces_button, SIGNAL(clicked(bool)),this,SLOT(get_faces()));
+    ui->tableFaces->setHorizontalHeaderLabels(QStringList()<<"id"<<"id работника");
+        //single
+    connect(this->ui->get_face_image_but, SIGNAL(clicked(bool)),this,SLOT(get_face_image()));
+
+
+
+
     //db settings
     db=QSqlDatabase::addDatabase("QPSQL");
     db.setHostName("192.168.126.130");
@@ -102,11 +112,10 @@ void MainWindow::get_departments()
 
     QSqlQuery query;
     QString commm="SELECT * "
-                    "FROM public.department ";
+                    "FROM public.department; ";
     query.exec(commm);
     for(int i = 0; query.next(); i++){
         QString id = query.value(0).toString();
-
         QString name = query.value(1).toString();
 
         ui->tableDep->insertRow(i);
@@ -141,7 +150,7 @@ void MainWindow::get_personal()
 
     QSqlQuery query;
     QString commm="SELECT * "
-                    "FROM public.personal ";
+                    "FROM public.personal; ";
     query.exec(commm);
     for(int i = 0; query.next(); i++){
         QString id = query.value(0).toString();
@@ -166,5 +175,56 @@ void MainWindow::get_personal()
 
 
     }
+    db.close();
+}
+
+void MainWindow::get_faces()
+{
+    ui->tableFaces->setRowCount(0);
+
+    bool ok = db.open();
+
+    QSqlQuery query;
+    QString commm="SELECT id,personal_id "
+                    "FROM public.faces; ";
+    query.exec(commm);
+    for(int i = 0; query.next(); i++){
+        QString id = query.value(0).toString();
+        QString per_id = query.value(1).toString();
+
+        ui->tableFaces->insertRow(i);
+        ui->tableFaces->setItem(i,0, new QTableWidgetItem(id));
+        ui->tableFaces->setItem(i,1, new QTableWidgetItem(per_id));
+
+    }
+    db.close();
+}
+
+void MainWindow::get_face_image()
+{
+    bool ok = db.open();
+
+
+    QSqlQuery query;
+    QString commm="SELECT file "
+                    "FROM public.faces "
+                    "WHERE id=";
+    commm+=std::to_string(ui->spin_face_id->value());
+    commm+=";";
+    query.exec(commm);
+
+    qDebug()<< query.lastError()<<"ban";
+
+
+    query.next();
+    QByteArray name = query.value(0).toByteArray();
+    qDebug()<<name.size()<<" "<<query.size();
+
+    QPixmap image;
+    image.loadFromData(name,"PNG");
+
+    ui->face_image->resize(image.width()/5,image.height()/5);
+    ui->face_image->setPixmap(image);
+
     db.close();
 }

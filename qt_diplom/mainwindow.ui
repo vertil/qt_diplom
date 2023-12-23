@@ -49,14 +49,14 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>220</y>
+      <x>50</x>
+      <y>240</y>
       <width>971</width>
       <height>501</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="departments">
      <attribute name="title">
@@ -164,13 +164,91 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Page</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableFaces">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>50</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <property name="columnCount">
+       <number>2</number>
+      </property>
+      <attribute name="horizontalHeaderVisible">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <column/>
+      <column/>
+     </widget>
+     <widget class="QPushButton" name="get_faces_button">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>10</y>
+        <width>83</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Get Faces</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="get_face_image_but">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>30</y>
+        <width>151</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Get face image</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spin_face_id">
+      <property name="geometry">
+       <rect>
+        <x>800</x>
+        <y>30</y>
+        <width>48</width>
+        <height>29</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="face_image">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>90</y>
+        <width>391</width>
+        <height>331</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>42</x>
       <y>59</y>
-      <width>81</width>
+      <width>341</width>
       <height>201</height>
      </rect>
     </property>

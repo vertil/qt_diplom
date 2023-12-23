@@ -25,6 +25,8 @@ public slots:
     void get_departments();
     void add_new_department();
     void get_personal();
+    void get_faces();
+    void get_face_image();
 private:
     Ui::MainWindow *ui;
     QSqlDatabase db;
