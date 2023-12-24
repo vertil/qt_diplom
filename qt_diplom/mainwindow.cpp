@@ -33,6 +33,29 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this->ui->get_face_image_but, SIGNAL(clicked(bool)),this,SLOT(get_face_image()));
 
 
+    //cameras
+        //list
+    connect(this->ui->get_cameras_button, SIGNAL(clicked(bool)),this,SLOT(get_cameras()));
+    ui->tableCam->setHorizontalHeaderLabels(QStringList()<<"id"<<"модель"
+                                                         <<"ip"<<"id кабинета"
+                                                         <<"направление"<<"№ прохода"
+                                                         <<"статус");
+
+
+
+    //cabinets
+        //list
+    connect(this->ui->get_cabinets_button, SIGNAL(clicked(bool)),this,SLOT(get_cabinets()));
+    ui->tableCabinets->setHorizontalHeaderLabels(QStringList()<<"id"<<"название"
+                                                          <<"этаж"<<"id отдела");
+
+
+    //in_out
+        //list
+    connect(this->ui->get_inout_button, SIGNAL(clicked(bool)),this,SLOT(get_in_out()));
+    ui->tableCabinets->setHorizontalHeaderLabels(QStringList()<<"time"<<"id работника"
+                                                               <<"id камеры");
+
 
 
     //db settings
@@ -226,5 +249,110 @@ void MainWindow::get_face_image()
     ui->face_image->resize(image.width()/5,image.height()/5);
     ui->face_image->setPixmap(image);
 
+    db.close();
+}
+
+void MainWindow::get_cameras()
+{
+    ui->tableCam->setRowCount(0);
+
+    bool ok = db.open();
+
+    QSqlQuery query;
+    QString commm="SELECT * "
+                    "FROM public.cameras; ";
+    query.exec(commm);
+    for(int i = 0; query.next(); i++){
+        QString id = query.value(0).toString();
+        QString cam_model = query.value(1).toString();
+        QString addr = query.value(2).toString();
+        QString cab_id = query.value(3).toString();
+        QString in_pos = query.value(4).toString();
+        QString pass_num = query.value(5).toString();
+        QString status = query.value(6).toString();
+
+        ui->tableCam->insertRow(i);
+        ui->tableCam->setItem(i,0, new QTableWidgetItem(id));
+        ui->tableCam->setItem(i,1, new QTableWidgetItem(cam_model));
+        ui->tableCam->setItem(i,2, new QTableWidgetItem(addr));
+        ui->tableCam->setItem(i,3, new QTableWidgetItem(cab_id));
+
+        QTableWidgetItem *item1 =new QTableWidgetItem();
+        item1->data(Qt::CheckStateRole);
+        if(in_pos=="true"){
+            item1->setCheckState(Qt::Checked);
+        }else{
+            item1->setCheckState(Qt::Unchecked);
+        }
+
+        ui->tableCam->setItem(i,4, item1);
+
+        ui->tableCam->setItem(i,5, new QTableWidgetItem(pass_num));
+
+        QTableWidgetItem *item2=new QTableWidgetItem();
+        item2->data(Qt::CheckStateRole);
+        if(status=="true"){
+            item2->setCheckState(Qt::Checked);
+        }else{
+            item2->setCheckState(Qt::Unchecked);
+        }
+
+        ui->tableCam->setItem(i,6, item2);
+
+    }
+    db.close();
+}
+
+void MainWindow::get_cabinets()
+{
+    ui->tableCabinets->setRowCount(0);
+
+    bool ok = db.open();
+
+    QSqlQuery query;
+    QString commm="SELECT * "
+                    "FROM public.cabinets; ";
+    query.exec(commm);
+    for(int i = 0; query.next(); i++){
+        QString id = query.value(0).toString();
+        QString name = query.value(1).toString();
+        QString floor = query.value(2).toString();
+        QString dep_id = query.value(3).toString();
+
+        ui->tableCabinets->insertRow(i);
+        ui->tableCabinets->setItem(i,0, new QTableWidgetItem(id));
+        ui->tableCabinets->setItem(i,1, new QTableWidgetItem(name));
+        ui->tableCabinets->setItem(i,2, new QTableWidgetItem(floor));
+        ui->tableCabinets->setItem(i,3, new QTableWidgetItem(dep_id));
+
+
+    }
+    db.close();
+}
+
+void MainWindow::get_in_out()
+{
+    ui->tableInOut->setRowCount(0);
+
+    bool ok = db.open();
+
+    QSqlQuery query;
+    QString commm="SELECT * "
+                    "FROM public.in_out_date; ";
+    query.exec(commm);
+    QString size=QString::number(query.size());
+    ui->totalInOutLabel->setText(size);
+    for(int i = 0; query.next(); i++){
+        QString time = query.value(0).toString();
+        QString per_id = query.value(1).toString();
+        QString cam_id = query.value(2).toString();
+
+        ui->tableInOut->insertRow(i);
+        ui->tableInOut->setItem(i,0, new QTableWidgetItem(time));
+        ui->tableInOut->setItem(i,1, new QTableWidgetItem(per_id));
+        ui->tableInOut->setItem(i,2, new QTableWidgetItem(cam_id));
+
+
+    }
     db.close();
 }

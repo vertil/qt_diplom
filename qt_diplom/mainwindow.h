@@ -6,6 +6,7 @@
 #include <QSqlQuery>
 #include <QByteArray>
 #include <QSqlError>
+#include <iostream>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,6 +28,9 @@ public slots:
     void get_personal();
     void get_faces();
     void get_face_image();
+    void get_cameras();
+    void get_cabinets();
+    void get_in_out();
 private:
     Ui::MainWindow *ui;
     QSqlDatabase db;

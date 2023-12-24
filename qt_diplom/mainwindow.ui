@@ -56,7 +56,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="departments">
      <attribute name="title">
@@ -164,9 +164,9 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="Faces">
      <attribute name="title">
-      <string>Page</string>
+      <string>Faces</string>
      </attribute>
      <widget class="QTableWidget" name="tableFaces">
       <property name="geometry">
@@ -242,14 +242,152 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="Cameras">
+     <attribute name="title">
+      <string>Cameras</string>
+     </attribute>
+     <widget class="QPushButton" name="get_cameras_button">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>10</y>
+        <width>83</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Get cameras</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableCam">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>70</y>
+        <width>871</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <property name="columnCount">
+       <number>7</number>
+      </property>
+      <attribute name="horizontalHeaderVisible">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Cabinets">
+     <attribute name="title">
+      <string>Cabinets</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableCabinets">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>120</y>
+        <width>491</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <property name="columnCount">
+       <number>4</number>
+      </property>
+      <attribute name="horizontalHeaderVisible">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+     </widget>
+     <widget class="QPushButton" name="get_cabinets_button">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>40</y>
+        <width>141</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Get cabinets</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="In_out">
+     <attribute name="title">
+      <string>In_out</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableInOut">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>70</y>
+        <width>381</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <property name="columnCount">
+       <number>3</number>
+      </property>
+      <attribute name="horizontalHeaderVisible">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <column/>
+      <column/>
+      <column/>
+     </widget>
+     <widget class="QPushButton" name="get_inout_button">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>10</y>
+        <width>141</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Get In-Out</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="totalInOutLabel">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>20</y>
+        <width>63</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>42</x>
       <y>59</y>
-      <width>341</width>
-      <height>201</height>
+      <width>331</width>
+      <height>111</height>
      </rect>
     </property>
     <property name="sizePolicy">
