@@ -381,55 +381,33 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="file_path_label">
     <property name="geometry">
      <rect>
-      <x>42</x>
-      <y>59</y>
-      <width>331</width>
-      <height>111</height>
+      <x>80</x>
+      <y>800</y>
+      <width>411</width>
+      <height>20</height>
      </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
     </property>
     <property name="text">
      <string>TextLabel</string>
     </property>
     <property name="scaledContents">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox">
+   <widget class="QPushButton" name="choose_button">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>0</y>
-      <width>48</width>
+      <x>100</x>
+      <y>750</y>
+      <width>191</width>
       <height>29</height>
      </rect>
     </property>
-    <property name="minimum">
-     <number>25</number>
-    </property>
-    <property name="maximum">
-     <number>51</number>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="spinBox_2">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>0</y>
-      <width>48</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <number>1</number>
+    <property name="text">
+     <string>choose buttnon</string>
     </property>
    </widget>
   </widget>

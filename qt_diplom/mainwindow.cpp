@@ -57,6 +57,9 @@ MainWindow::MainWindow(QWidget *parent)
                                                                <<"id камеры");
 
 
+    //choose and load file
+    connect(this->ui->choose_button, SIGNAL(clicked(bool)),this,SLOT(choose_file()));
+
 
     //db settings
     db=QSqlDatabase::addDatabase("QPSQL");
@@ -80,29 +83,6 @@ void MainWindow::check_con()
 
     ui->checkBox->setChecked(ok);
 
-    QSqlQuery query;
-    QString commm="SELECT file "
-                    "FROM public.faces "
-                    "WHERE id=";
-    commm+=std::to_string(ui->spinBox->value());
-    query.exec(commm);
-
-    qDebug()<< query.lastError();
-
-    query.next();
-    QByteArray name = query.value(0).toByteArray();
-    qDebug()<<name.size()<<" "<<query.size();
-
-    QPixmap image;
-    if(ui->spinBox_2->value()==0){
-        image.loadFromData(name,"PNG");
-
-    }else{
-        image.loadFromData(name,"JPG");
-    }
-
-    ui->label->resize(image.width(),image.height());
-    ui->label->setPixmap(image);
 
     db.close();
 
@@ -355,4 +335,38 @@ void MainWindow::get_in_out()
 
     }
     db.close();
+}
+
+void MainWindow::choose_file()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                            tr("Open Image"), "C:", tr("Image Files (*.png)"));
+
+    ui->file_path_label->setText(fileName);
+
+    QFile file(fileName);
+
+
+    if (!file.open(QIODevice::ReadOnly)){
+        qDebug()<<"can't open file "<<fileName;
+    }
+    QByteArray bytes=file.readAll();
+    file.close();
+    if(bytes.size()==0){
+        return ;
+    }
+
+    bool ok = db.open();
+
+    QSqlQuery query;
+
+    QString commm="INSERT INTO public.faces(file, personal_id) "
+                    "VALUES(:file, '1'); ";
+    query.prepare(commm);
+    query.bindValue(":file", bytes);
+    query.exec();
+
+    db.close();
+    qDebug()<<"ban";
+
 }

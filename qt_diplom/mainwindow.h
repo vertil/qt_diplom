@@ -7,6 +7,8 @@
 #include <QByteArray>
 #include <QSqlError>
 #include <iostream>
+#include <QFileDialog>
+#include <QFile>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -31,6 +33,7 @@ public slots:
     void get_cameras();
     void get_cabinets();
     void get_in_out();
+    void choose_file();
 private:
     Ui::MainWindow *ui;
     QSqlDatabase db;
